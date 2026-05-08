@@ -11,6 +11,7 @@ Current limitations include:
 - No virtual memory system
 - No scheduler
 - No userspace
+- Nothing with memory
 
 ---
 

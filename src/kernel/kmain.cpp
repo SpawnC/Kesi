@@ -21,8 +21,6 @@ static volatile uint64_t limine_base_revision[3] = {
 
     drivers::video::framebuffer::clear(graphics::colors::framebuffer::Color::White);
 
-    graphics::text::draw_string(10, 10, "Kesi Kernel initialized", graphics::colors::framebuffer::Color::Red, 5);
-
     while (true) {
         asm volatile("hlt");
     }
