@@ -33,7 +33,7 @@ namespace graphics::text {
     /// @param x The x-coordinate of the top-left corner where the character will be drawn. The origin (0, 0) is located at the top-left corner of the framebuffer.
     /// @param y The y-coordinate of the top-left corner where the character will be drawn. The origin (0, 0) is located at the top-left corner of the framebuffer.
     /// @param c The character to be drawn. This should be a valid ASCII character (0-127) that corresponds to the bitmap font data.
-    /// @param color The color value to use for rendering the character, specified as a Color enum value from graphics::colors::framebuffer::Color.
+    /// @param color The color value to use for ren dering the character, specified as a Color enum value from graphics::colors::framebuffer::Color.
     /// @param scale The scaling factor for rendering the character. A value of 1 means no scaling, while values greater than 1 will enlarge the character.
     void draw_char(uint32_t x, uint32_t y, char c, graphics::colors::framebuffer::Color color, uint32_t scale = 1);
 

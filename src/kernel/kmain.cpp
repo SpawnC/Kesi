@@ -2,9 +2,12 @@
 #include "core/panic.hpp"
 #include "core/assert.hpp"
 #include "../libk/string.hpp"
+#include "graphics/colors/framebuffer/framebuffer_colors.hpp"
 #include "drivers/video/framebuffer/framebuffer.hpp"
 #include "graphics/text/text.hpp"
 #include "graphics/fonts/font8x8.hpp"
+#include "graphics/console/console.hpp"
+#include "drivers/serial/serial.hpp"
 
 __attribute__((used, section(".limine_requests")))
 static volatile uint64_t limine_base_revision[3] = {
@@ -19,7 +22,14 @@ static volatile uint64_t limine_base_revision[3] = {
         kernel::panic("Failed to initialize framebuffer");
     }
 
-    drivers::video::framebuffer::clear(graphics::colors::framebuffer::Color::White);
+    drivers::video::framebuffer::clear();
+
+    if (!graphics::console::initialize()) {
+        kernel::panic("Failed to initialize console");
+    }
+
+    serial::init();
+
 
     while (true) {
         asm volatile("hlt");

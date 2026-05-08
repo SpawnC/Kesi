@@ -16,14 +16,12 @@ namespace drivers::video::framebuffer {
         };
 
         limine_framebuffer* g_framebuffer = nullptr;
-
-        uint32_t* framebuffer = nullptr;
-
-        uint64_t pitch  = 0;
     }
 
     uint64_t width  = 0;
     uint64_t height = 0;
+    uint32_t* address = nullptr;
+    uint64_t pitch = 0;   
 
     bool initialize() {
 
@@ -36,12 +34,12 @@ namespace drivers::video::framebuffer {
         g_framebuffer =
             framebuffer_request.response->framebuffers[0];
 
-        framebuffer =
+        address =
             static_cast<uint32_t*>(g_framebuffer->address);
 
         width  = g_framebuffer->width;
         height = g_framebuffer->height;
-        pitch  = g_framebuffer->pitch / 4;
+        pitch  = g_framebuffer->pitch;
 
         return true;
     }
@@ -53,7 +51,10 @@ namespace drivers::video::framebuffer {
         if (x >= width || y >= height)
             return;
 
-        framebuffer[y * pitch + x] = color;
+        uint8_t* row =
+            reinterpret_cast<uint8_t*>(address) + y * pitch;
+
+        reinterpret_cast<uint32_t*>(row)[x] = color;
     }
 
     void clear(graphics::colors::framebuffer::Color color) {

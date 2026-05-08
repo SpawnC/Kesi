@@ -8,6 +8,8 @@ namespace drivers::video::framebuffer {
 
     extern uint64_t width;
     extern uint64_t height;
+    extern uint32_t* address;
+    extern uint64_t pitch;
 
     /// @brief Initializes the framebuffer for graphics output.
     /// @details Sets up the framebuffer based on information provided by the bootloader,
